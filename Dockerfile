@@ -27,6 +27,9 @@ RUN chown -R www-data:www-data /var/www/html \
 # Configurar Apache para TestLink
 COPY docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
 
+# Configurar ServerName para evitar warnings
+RUN echo "ServerName testlink-scb" >> /etc/apache2/apache2.conf
+
 # Exponer puerto 80
 EXPOSE 80
 
