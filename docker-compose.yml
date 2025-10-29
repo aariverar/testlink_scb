@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # Servicio de base de datos MariaDB
+  database:
+    image: mariadb:10.11
+    container_name: testlink-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: testlink
+      MYSQL_USER: testlink_user
+      MYSQL_PASSWORD: testlink_pass
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    networks:
+      - testlink-network
+
+  # Servicio de aplicación TestLink
+  web:
+    build: .
+    container_name: testlink-web
+    depends_on:
+      - database
+    environment:
+      DB_HOST: database
+      DB_NAME: testlink
+      DB_USER: testlink_user
+      DB_PASSWORD: testlink_pass
+    volumes:
+      - ./testlink_1_9_20_fixed:/var/www/html
+      - ./logs:/var/www/html/logs
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - testlink-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  testlink-network:
+    driver: bridge

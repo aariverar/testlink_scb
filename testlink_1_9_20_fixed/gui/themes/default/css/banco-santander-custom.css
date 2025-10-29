@@ -1,0 +1,43 @@
+/* Estilos personalizados para el logo de Banco Santander */
+
+/* Logo en el navbar (parte superior) */
+.navbar img[src*="banco-santander-logo"],
+.navbar-brand img[src*="banco-santander-logo"],
+img[src*="banco-santander-logo"] {
+    max-height: 40px !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 150px !important;
+}
+
+/* Logo en la página de login */
+.login-logo img[src*="banco-santander-logo"],
+.grid__container img[src*="banco-santander-logo"] {
+    max-height: 80px !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 200px !important;
+    margin: 10px 0 !important;
+}
+
+/* Logo en headers y títulos */
+.title img[src*="banco-santander-logo"],
+.header img[src*="banco-santander-logo"] {
+    max-height: 50px !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 180px !important;
+    vertical-align: middle !important;
+}
+
+/* Ajustes generales para mantener proporciones */
+img[src*="banco-santander-logo"] {
+    object-fit: contain !important;
+    background-color: transparent !important;
+}
+
+/* Estilo específico para el login */
+.form--login + p img[src*="banco-santander-logo"] {
+    display: block !important;
+    margin: 0 auto 15px auto !important;
+}

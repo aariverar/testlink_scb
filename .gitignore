@@ -1,0 +1,140 @@
+# Archivos y directorios a ignorar en Git
+
+# ===================================
+# ARCHIVOS TEMPORALES Y LOGS
+# ===================================
+
+# Logs de aplicación
+logs/*
+!logs/.gitkeep
+testlink_1_9_20_fixed/logs/*
+!testlink_1_9_20_fixed/logs/.gitkeep
+
+# Archivos temporales de Windows
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+
+# Archivos temporales de PHP
+*.log
+*.cache
+
+# ===================================
+# DATOS DE BASE DE DATOS (IMPORTANTE)
+# ===================================
+
+# Datos de MariaDB - NO subir datos sensibles
+mariadb/data/*
+!mariadb/data/.gitkeep
+
+# Archivos de configuración con credenciales sensibles
+# (Mantenemos los archivos example)
+# custom_config.inc.php  # Comentado porque tiene configuración necesaria
+
+# ===================================
+# ARCHIVOS DE SISTEMA Y RUNTIME
+# ===================================
+
+# Archivos de proceso en ejecución
+*.pid
+*.lock
+
+# Directorio de upload temporal
+upload_area/temp/*
+!upload_area/temp/.gitkeep
+testlink_1_9_20_fixed/upload_area/temp/*
+!testlink_1_9_20_fixed/upload_area/temp/.gitkeep
+
+# ===================================
+# DEPENDENCIAS Y VENDOR
+# ===================================
+
+# Composer (si aplica)
+vendor/
+node_modules/
+
+# ===================================
+# ARCHIVOS IDE Y EDITORES
+# ===================================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# PhpStorm
+.idea/
+
+# Sublime Text
+*.sublime-*
+
+# ===================================
+# ARCHIVOS DE CONFIGURACIÓN LOCAL
+# ===================================
+
+# Configuraciones locales específicas del desarrollador
+.env
+.env.local
+config.local.php
+
+# Archivos de backup automático
+*.bak
+*.backup
+*~
+
+# ===================================
+# DOCKER Y CONTAINERS
+# ===================================
+
+# Volúmenes de Docker (datos persistentes)
+docker-volumes/
+.docker/
+
+# ===================================
+# ARCHIVOS ESPECÍFICOS DE TESTLINK
+# ===================================
+
+# Archivos de sesión de TestLink
+testlink_1_9_20_fixed/gui/templates_c/*
+!testlink_1_9_20_fixed/gui/templates_c/.gitkeep
+
+# Cache de TestLink
+testlink_1_9_20_fixed/cache/*
+!testlink_1_9_20_fixed/cache/.gitkeep
+
+# Archivos de configuración temporal
+*.php.backup
+
+# ===================================
+# ARCHIVOS GRANDES DE RUNTIME
+# ===================================
+
+# Evitar subir ejecutables grandes de MariaDB si no son necesarios
+# mariadb/bin/*.exe  # Comentado porque son necesarios para funcionar
+# php/*.exe          # Comentado porque son necesarios para funcionar
+
+# ===================================
+# GITHUB Y CI/CD
+# ===================================
+
+# Secretos locales (no los de GitHub Actions)
+secrets.json
+.secrets
+
+# ===================================
+# SISTEMA OPERATIVO
+# ===================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+ehthumbs.db
+*.lnk

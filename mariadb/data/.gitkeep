@@ -1,0 +1,2 @@
+# Mantener esta carpeta en Git pero sin datos de MariaDB
+# Los datos se generan al ejecutar la aplicación
