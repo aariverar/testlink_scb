@@ -27,11 +27,21 @@ RUN chown -R www-data:www-data /var/www/html \
 # Configurar Apache para TestLink
 COPY docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
 
+# Copiar script de inicio
+COPY start-railway.sh /usr/local/bin/start-railway.sh
+RUN chmod +x /usr/local/bin/start-railway.sh
+
 # Configurar ServerName para evitar warnings
 RUN echo "ServerName testlink-scb" >> /etc/apache2/apache2.conf
+
+# Variables de entorno para Railway
+ENV APACHE_DOCUMENT_ROOT=/var/www/html
+ENV APACHE_RUN_USER=www-data
+ENV APACHE_RUN_GROUP=www-data
+ENV APACHE_LOG_DIR=/var/log/apache2
 
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando de inicio
-CMD ["apache2-foreground"]
+# Comando para iniciar Apache
+CMD ["/usr/local/bin/start-railway.sh"]
