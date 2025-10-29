@@ -1,0 +1,17 @@
+# Railway Configuration for Single Service
+# Use this instead of docker-compose for Railway deployment
+
+version: '3.8'
+
+services:
+  web:
+    build: .
+    environment:
+      - DATABASE_URL=mysql://testlink_user:testlink_pass@roundhouse.proxy.rlwy.net:58471/railway
+      - DB_HOST=roundhouse.proxy.rlwy.net
+      - DB_PORT=58471
+      - DB_NAME=railway
+      - DB_USER=testlink_user
+      - DB_PASSWORD=testlink_pass
+    ports:
+      - "80:80"

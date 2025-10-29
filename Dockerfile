@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
 # Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite
 
+# Instalar curl para healthchecks
+RUN apt-get install -y curl
+
 # Copiar archivos de TestLink
 COPY testlink_1_9_20_fixed/ /var/www/html/
 
