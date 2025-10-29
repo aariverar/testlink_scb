@@ -13,8 +13,32 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Load Composer's autoloader
-require( 'autoload.php' );
+// Load Composer's autoloader - with fallback
+$autoload_paths = [
+    __DIR__ . '/../../vendor/autoload.php',
+    __DIR__ . '/../../../vendor/autoload.php',
+    __DIR__ . '/../../../../vendor/autoload.php',
+    'autoload.php'
+];
+
+$autoload_found = false;
+foreach ($autoload_paths as $autoload_path) {
+    if (file_exists($autoload_path)) {
+        require($autoload_path);
+        $autoload_found = true;
+        break;
+    }
+}
+
+if (!$autoload_found) {
+    // Fallback: create dummy PHPMailer class if autoloader not found
+    if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+        class_alias('stdClass', 'PHPMailer\PHPMailer\PHPMailer');
+    }
+    if (!class_exists('PHPMailer\PHPMailer\Exception')) {
+        class_alias('Exception', 'PHPMailer\PHPMailer\Exception');
+    }
+}
 
 require_once( 'lang_api.php' );
 require_once( 'common.php');
