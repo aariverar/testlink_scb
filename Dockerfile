@@ -27,6 +27,10 @@ COPY testlink_1_9_20_fixed/ /var/www/html/
 # Configurar Apache simple
 COPY docker/apache-simple.conf /etc/apache2/sites-available/000-default.conf
 
+# Copiar script de setup
+COPY setup-testlink.sh /usr/local/bin/setup-testlink.sh
+RUN chmod +x /usr/local/bin/setup-testlink.sh
+
 # Instalar dependencias de Composer con fallback
 WORKDIR /var/www/html
 RUN if [ -f "composer.json" ]; then \
@@ -42,12 +46,23 @@ RUN if [ ! -f "vendor/autoload.php" ]; then \
         echo '<?php /* Fallback autoload */' > vendor/autoload.php; \
     fi
 
-# Configurar permisos
+# Configurar permisos y crear directorios necesarios
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 755 /var/www/html \
+    && mkdir -p /var/www/html/gui/templates_c \
+    && mkdir -p /var/testlink/logs \
+    && mkdir -p /var/testlink/upload_area \
+    && mkdir -p /var/www/html/logs \
+    && mkdir -p /var/www/html/upload_area \
+    && chmod -R 777 /var/www/html/gui/templates_c \
+    && chmod -R 777 /var/testlink/logs \
+    && chmod -R 777 /var/testlink/upload_area \
+    && chmod -R 777 /var/www/html/logs \
+    && chmod -R 777 /var/www/html/upload_area \
+    && chown -R www-data:www-data /var/testlink
 
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando simple para iniciar Apache
-CMD ["apache2-foreground"]
+# Comando simple para iniciar Apache con setup
+CMD ["/usr/local/bin/setup-testlink.sh"]
