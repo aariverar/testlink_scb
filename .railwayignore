@@ -1,0 +1,6 @@
+# Railway Deployment - Solo App (sin base de datos por ahora)
+# Para usar con base de datos externa
+
+*.railway.yml
+docker-compose.yml
+docker-compose.railway.yml
